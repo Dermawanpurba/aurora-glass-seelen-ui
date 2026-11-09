@@ -44,22 +44,19 @@ body {
   position: relative !important;
 }
 
-/* Invisible top-edge trigger strip (y: 0 to 6px) to detect mouse hovering at the absolute top */
+/* Centered top-edge trigger sensor (y: 0 to 4px) — leaves left/right window corners free */
 #root::before {
   content: "" !important;
   display: block !important;
   position: fixed !important;
   top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 6px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(860px, 72vw) !important;
+  height: 4px !important;
   background: transparent !important;
   pointer-events: auto !important;
   z-index: 1 !important;
-}
-
-#root:hover::before {
-  pointer-events: none !important;
 }
 
 .ft-bar {
@@ -73,7 +70,7 @@ body {
   width: fit-content !important;
   max-width: 92vw !important;
   min-height: 32px !important;
-  margin: 6px auto 0 auto !important;
+  margin: 4px auto 0 auto !important;
   padding: 3px 16px !important;
   box-sizing: border-box !important;
 
@@ -91,19 +88,32 @@ body {
   overflow: visible !important;
 
   /* Hidden State by Default (Tucked up above screen) */
-  transform: translate3d(0, calc(-100% - 14px), 0) scale(0.92) !important;
+  transform: translate3d(0, calc(-100% - 14px), 0) scale(0.95) !important;
   opacity: 0 !important;
   pointer-events: none !important;
 
-  /* iOS Spring Transition */
+  /* Smooth, stable transition without jitter */
   transition:
-    transform 280ms cubic-bezier(0.16, 1, 0.3, 1.1),
-    opacity 220ms ease,
+    transform 210ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    opacity 160ms ease,
     background 180ms ease,
     border-color 180ms ease,
-    box-shadow 260ms ease !important;
-  transition-delay: 180ms !important;
+    box-shadow 220ms ease !important;
+  transition-delay: 120ms !important;
   transform-origin: top center !important;
+
+  /* Invisible hover cushion around the pill so cursor never loses hover between top edge and pill */
+  &::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -8px !important;
+    bottom: -6px !important;
+    left: -12px !important;
+    right: -12px !important;
+    background: transparent !important;
+    pointer-events: inherit !important;
+    z-index: -1 !important;
+  }
 
   > .bg-layers {
     display: none !important;
