@@ -8,21 +8,24 @@
   --slu-widget-enter-duration: 140ms;
   --slu-widget-exit-duration: 100ms;
   --aurora-glass-brightness: 1.04;
+  --slu-std-fg-color: rgb(255 255 255 / 0.98);
+  --slu-std-fg-secondary-color: rgb(226 232 240 / 0.86);
+  --slu-std-fg-muted-color: rgb(160 174 192 / 0.74);
   --slu-dock-glass-panel: linear-gradient(
-    120deg,
-    var(--aurora-panel-start, #0a0a0a80) 0%,
-    rgb(40 40 60 / 0.46) 55%,
-    var(--aurora-panel-end, #3c506466) 100%
+    135deg,
+    rgb(11 14 22 / 0.95) 0%,
+    rgb(17 22 35 / 0.95) 55%,
+    rgb(22 30 46 / 0.94) 100%
   );
   --slu-dock-glass-item: linear-gradient(
     135deg,
-    rgb(20 20 25 / 0.44),
-    rgb(45 45 65 / 0.38)
+    rgb(28 34 50 / 0.86),
+    rgb(38 46 66 / 0.82)
   );
   --slu-dock-glass-item-hover: linear-gradient(
     135deg,
-    rgb(40 40 50 / 0.54),
-    rgb(65 70 90 / 0.48)
+    rgb(46 56 80 / 0.92),
+    rgb(60 72 100 / 0.88)
   );
   --aurora-accent-color: color-mix(
     in oklab,

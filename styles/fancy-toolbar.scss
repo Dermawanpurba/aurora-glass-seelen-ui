@@ -55,10 +55,16 @@ body {
   height: 6px !important;
   background: transparent !important;
   pointer-events: auto !important;
-  z-index: 99999 !important;
+  z-index: 1 !important;
+}
+
+#root:hover::before {
+  pointer-events: none !important;
 }
 
 .ft-bar {
+  position: relative !important;
+  z-index: 10 !important;
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
@@ -73,8 +79,8 @@ body {
 
   /* iPhone Pro Dynamic Island Pill / Capsule Shape */
   border-radius: 9999px !important;
-  background: rgba(10, 12, 18, 0.94) !important; /* Deep OLED black frosted glass */
-  border: 1.5px solid rgba(255, 255, 255, 0.22) !important;
+  background: rgba(10, 13, 20, 0.96) !important; /* High-contrast OLED black glass */
+  border: 1.5px solid rgba(255, 255, 255, 0.24) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.24),
     0 12px 36px rgba(0, 0, 0, 0.58),
@@ -217,21 +223,39 @@ body {
 .ft-bar-item[id="@default/focused-app"] {
   font-weight: 700 !important;
   color: #ffffff !important;
+  opacity: 1 !important;
   letter-spacing: -0.02em !important;
 }
 
 .ft-bar-item[id="@default/focused-app-title"] {
-  color: rgb(255 255 255 / 0.78) !important;
-  font-weight: 400 !important;
-  max-width: 220px !important;
+  color: rgb(255 255 255 / 0.92) !important;
+  opacity: 1 !important;
+  font-weight: 500 !important;
+  max-width: 240px !important;
   overflow: hidden !important;
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
 
-/* Separator symbols */
-.ft-bar-item:has(span:only-child) {
-  opacity: 0.3 !important;
+/* Calendar / Clock Trigger in Center */
+.ft-bar-item[id="@seelen/tb-calendar-popup"] {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+  border-radius: 9999px !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-color: rgba(255, 255, 255, 0.22) !important;
+  }
+}
+
+/* Non-clickable Separator symbols only (| and -) */
+.ft-bar-item:not(.ft-bar-item-clickable):not([id^="@"]) {
+  opacity: 0.38 !important;
   padding: 0 2px !important;
   min-width: unset !important;
   pointer-events: none !important;

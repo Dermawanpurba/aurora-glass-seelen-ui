@@ -43,13 +43,13 @@ settings:
           label:
             en: Panel dark tint
             zh-TW: 面板深色色調
-          initialValue: "#0a0a0a80"
+          initialValue: "#0b0e16f2"
         - syntax: <color>
           name: --aurora-panel-end
           label:
             en: Panel cool tint
             zh-TW: 面板冷色色調
-          initialValue: "#3c506466"
+          initialValue: "#161e2ef0"
   - group:
       header:
         en: Motion

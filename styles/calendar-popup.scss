@@ -1,3 +1,33 @@
+.calendar-popup {
+  color: rgb(255 255 255 / 0.96) !important;
+
+  .calendar-header .calendar-date {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+  }
+
+  .calendar-weekday {
+    color: rgb(226 232 240 / 0.88) !important;
+    font-weight: 700 !important;
+  }
+
+  .calendar-cell {
+    color: rgb(255 255 255 / 0.94) !important;
+    font-weight: 500 !important;
+
+    &.calendar-cell-off-month {
+      color: rgb(148 163 184 / 0.55) !important;
+    }
+
+    &.calendar-cell-today {
+      color: #60a5fa !important;
+      font-weight: 800 !important;
+      background: rgba(59, 130, 246, 0.18) !important;
+      border-color: rgba(96, 165, 250, 0.45) !important;
+    }
+  }
+}
+
 .calendar-month-year,
 .calendar-navigator,
 .calendar-cell,
