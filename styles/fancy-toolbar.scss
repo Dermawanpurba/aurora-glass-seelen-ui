@@ -1,4 +1,4 @@
-﻿.ft-bar,
+.ft-bar,
 body {
   container-name: aurora-toolbar-layout;
 }
@@ -9,16 +9,17 @@ body {
 .ft-bar-item-content,
 .ft-bar-item-content > span {
   font-family:
+    "Plus Jakarta Sans",
+    "Inter",
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI Variable Text",
-    "Plus Jakarta Sans",
-    "Inter",
     "Segoe UI",
     sans-serif !important;
-  font-weight: 500 !important;
+  font-weight: 600 !important;
   font-size: 13px !important;
   letter-spacing: -0.01em !important;
+  color: #0f172a !important;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -30,7 +31,7 @@ body {
 }
 
 /* =========================================================================
-   iPhone 17 Pro Dynamic Island / Notch Pop-Up Top Bar
+   Light Frosted Glass Putih-Biru Poni Top Bar (Always Visible)
    ========================================================================= */
 
 #root {
@@ -39,24 +40,9 @@ body {
   align-items: flex-start !important;
   width: 100vw !important;
   background: transparent !important;
-  pointer-events: none !important; /* Allow clicks to pass through freely to apps below */
+  pointer-events: none !important;
   overflow: visible !important;
   position: relative !important;
-}
-
-/* Centered top-edge trigger sensor (y: 0 to 4px) — leaves left/right window corners free */
-#root::before {
-  content: "" !important;
-  display: block !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: min(860px, 72vw) !important;
-  height: 4px !important;
-  background: transparent !important;
-  pointer-events: auto !important;
-  z-index: 1 !important;
 }
 
 .ft-bar {
@@ -65,55 +51,41 @@ body {
   display: flex !important;
   flex-direction: row !important;
   align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
   width: fit-content !important;
+  min-width: 530px !important;
   max-width: 92vw !important;
-  min-height: 32px !important;
-  margin: 4px auto 0 auto !important;
-  padding: 3px 16px !important;
+  min-height: 40px !important;
+  margin: 6px auto 0 auto !important;
+  padding: 5px 16px !important;
   box-sizing: border-box !important;
 
-  /* iPhone Pro Dynamic Island Pill / Capsule Shape */
+  /* Light Frosted Glass Putih-Biru Capsule */
   border-radius: 9999px !important;
-  background: rgba(10, 13, 20, 0.96) !important; /* High-contrast OLED black glass */
-  border: 1.5px solid rgba(255, 255, 255, 0.24) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(248, 251, 255, 0.96) 0%,
+    rgba(226, 239, 255, 0.92) 100%
+  ) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.98) !important;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.24),
-    0 12px 36px rgba(0, 0, 0, 0.58),
-    0 4px 12px rgba(0, 0, 0, 0.38) !important;
-  backdrop-filter: blur(32px) saturate(200%) brightness(1.05) !important;
-  -webkit-backdrop-filter: blur(32px) saturate(200%) brightness(1.05) !important;
-  color: rgb(255 255 255 / 0.95) !important;
+    0 12px 28px -4px rgba(15, 23, 42, 0.18),
+    0 4px 12px -2px rgba(37, 99, 235, 0.12),
+    inset 0 1.5px 0 #ffffff !important;
+  backdrop-filter: blur(28px) saturate(190%) brightness(1.03) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) brightness(1.03) !important;
+  color: #0f172a !important;
   overflow: visible !important;
 
-  /* Hidden State by Default (Tucked up above screen) */
-  transform: translate3d(0, calc(-100% - 14px), 0) scale(0.95) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-
-  /* Smooth, stable transition without jitter */
+  /* Always Visible State */
+  transform: translate3d(0, 0, 0) scale(1) !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
   transition:
-    transform 210ms cubic-bezier(0.2, 0.9, 0.3, 1),
-    opacity 160ms ease,
+    box-shadow 180ms ease,
     background 180ms ease,
-    border-color 180ms ease,
-    box-shadow 220ms ease !important;
-  transition-delay: 120ms !important;
-  transform-origin: top center !important;
-
-  /* Invisible hover cushion around the pill so cursor never loses hover between top edge and pill */
-  &::before {
-    content: "" !important;
-    position: absolute !important;
-    top: -8px !important;
-    bottom: -6px !important;
-    left: -12px !important;
-    right: -12px !important;
-    background: transparent !important;
-    pointer-events: inherit !important;
-    z-index: -1 !important;
-  }
+    border-color 180ms ease !important;
 
   > .bg-layers {
     display: none !important;
@@ -124,12 +96,25 @@ body {
   .ft-bar-right {
     display: inline-flex !important;
     align-items: center !important;
-    gap: 3px !important;
+    gap: 6px !important;
     flex: 0 0 auto !important;
     overflow: visible !important;
   }
 
-  /* Clean dividerless Dynamic Island (No stray vertical lines) */
+  /* Windows 11 Blue 4-Square Emblem on Left of Poni Bar */
+  .ft-bar-left::before {
+    content: "" !important;
+    display: inline-block !important;
+    width: 18px !important;
+    height: 18px !important;
+    margin-right: 2px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect x='2' y='2' width='9' height='9' rx='1.8' fill='%230284c7'/%3E%3Crect x='13' y='2' width='9' height='9' rx='1.8' fill='%230284c7'/%3E%3Crect x='2' y='13' width='9' height='9' rx='1.8' fill='%230284c7'/%3E%3Crect x='13' y='13' width='9' height='9' rx='1.8' fill='%230284c7'/%3E%3C/svg%3E") !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    flex-shrink: 0 !important;
+  }
+
   .ft-bar-left::after,
   .ft-bar-center::after {
     display: none !important;
@@ -137,50 +122,42 @@ body {
   }
 }
 
-/* =========================================================================
-   iPhone Pop-Up Logic:
-   Pops down smoothly from top center when mouse touches the top edge or island
-   ========================================================================= */
-
-/* Pop-Down Active State (Instant reveal on hover/focus) */
+/* Override any auto-hide state from Seelen UI so Poni Bar stays visible */
+.ft-bar.ft-bar-hidden,
+.ft-bar[data-hidden="true"],
 #root:hover .ft-bar,
 .ft-bar:hover,
 .ft-bar:focus-within {
   transform: translate3d(0, 0, 0) scale(1) !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-  transition-delay: 0s !important;
 }
 
-/* Fallback hiding if Seelen UI assigns .ft-bar-hidden and mouse is not hovering */
-.ft-bar.ft-bar-hidden:not(:hover),
-.ft-bar[data-hidden="true"]:not(:hover) {
-  transform: translate3d(0, calc(-100% - 14px), 0) scale(0.92) !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-/* Transparent items inside the Dynamic Island */
+/* Base items inside the Poni Bar */
 .ft-bar-item {
   box-sizing: border-box !important;
-  height: 24px !important;
-  min-height: 24px !important;
+  height: 28px !important;
+  min-height: 28px !important;
   margin-block: 0 !important;
   margin-inline: 1px !important;
-  padding: 2px 6px !important;
+  padding: 3px 8px !important;
   line-height: 20px !important;
-  color: rgb(255 255 255 / 0.92) !important;
+  color: #0f172a !important;
   background: transparent !important;
   border: 1px solid transparent !important;
-  border-radius: 6px !important;
+  border-radius: 9999px !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   box-shadow: none !important;
   animation: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
   transition:
-    background 130ms ease,
-    border-color 130ms ease,
-    color 130ms ease !important;
+    background 140ms ease,
+    border-color 140ms ease,
+    color 140ms ease,
+    box-shadow 140ms ease !important;
 
   &:not(.running)::before {
     content: none !important;
@@ -188,10 +165,10 @@ body {
   }
 
   &.ft-bar-item-clickable:hover {
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.16) !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-    box-shadow: none !important;
+    color: #0f172a !important;
+    background: rgba(59, 130, 246, 0.14) !important;
+    border-color: rgba(59, 130, 246, 0.28) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
     transform: none !important;
   }
 
@@ -200,137 +177,136 @@ body {
   &.active,
   &.running,
   &.ft-bar-item-active {
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.22) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: #0f172a !important;
+    background: rgba(59, 130, 246, 0.2) !important;
+    border: 1px solid rgba(59, 130, 246, 0.38) !important;
     outline: none !important;
-    box-shadow: none !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
   }
 
   &.ft-bar-item-clickable:active:not([data-dragging="true"]) {
-    color: #ffffff !important;
-    background: rgba(255, 255, 255, 0.28) !important;
+    color: #0f172a !important;
+    background: rgba(59, 130, 246, 0.26) !important;
   }
 }
 
-/* User avatar */
-.ft-bar-item:is(
-    [id="@seelen/tb-user-menu"],
-    [id="@default/user-folder"]
-  )
-  .ft-bar-item-content
-  img {
-  border-radius: 50% !important;
-  clip-path: circle(50%);
-  object-fit: cover !important;
-}
-
-/* Focused App Name */
-.ft-bar-item[id="@default/focused-app"] {
-  font-weight: 700 !important;
-  color: #ffffff !important;
-  opacity: 1 !important;
-  letter-spacing: -0.02em !important;
-}
-
-.ft-bar-item[id="@default/focused-app-title"] {
-  color: rgb(255 255 255 / 0.92) !important;
-  opacity: 1 !important;
-  font-weight: 500 !important;
-  max-width: 240px !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
-  white-space: nowrap !important;
-}
-
-/* Calendar / Clock Trigger in Center */
+/* 1. Kalender Pill in Poni Bar (Matches Reference Image '1. Kalender') */
 .ft-bar-item[id="@seelen/tb-calendar-popup"] {
-  color: #ffffff !important;
-  opacity: 1 !important;
-  font-weight: 600 !important;
-  padding: 2px 10px !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
   border-radius: 9999px !important;
-  pointer-events: auto !important;
-  cursor: pointer !important;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.18) !important;
-    border-color: rgba(255, 255, 255, 0.22) !important;
-  }
-}
-
-/* Aurora MP3 Music Pack Pill in Dynamic Island */
-.ft-bar-item[id="@aurora/mp3-player"] {
-  color: #38bdf8 !important;
-  opacity: 1 !important;
-  font-weight: 600 !important;
-  padding: 2px 6px !important;
-  border-radius: 9999px !important;
-  background: rgba(56, 189, 248, 0.14) !important;
-  border: 1px solid rgba(56, 189, 248, 0.32) !important;
-  pointer-events: auto !important;
-  cursor: pointer !important;
-
-  &:hover {
-    color: #ffffff !important;
-    background: rgba(56, 189, 248, 0.28) !important;
-    border-color: rgba(56, 189, 248, 0.55) !important;
-    box-shadow: 0 0 10px rgba(56, 189, 248, 0.35) !important;
-  }
-}
-
-/* Non-clickable Separator symbols only (| and -) */
-.ft-bar-item:not(.ft-bar-item-clickable):not([id^="@"]) {
-  opacity: 0.38 !important;
-  padding: 0 2px !important;
-  min-width: unset !important;
-  pointer-events: none !important;
-}
-
-/* Workspaces */
-.ft-bar-item:is(
-    [id="@default/workspaces-dotted"],
-    [id="@default/workspaces-named"],
-    [id="@default/workspaces-numbered"]
-  ) {
-  color: rgb(255 255 255 / 0.86) !important;
-  background: transparent !important;
-  border-color: transparent !important;
-  box-shadow: none !important;
-
-  button[data-skin="transparent"] {
-    color: rgb(255 255 255 / 0.82) !important;
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    border-radius: 6px !important;
-
-    &[style*="system-accent-color"] {
-      color: var(--aurora-accent-color) !important;
-      background: rgba(255, 255, 255, 0.14) !important;
-      border-color: transparent !important;
-      box-shadow: none !important;
-    }
-  }
-}
-
-.ft-bar-item[id="@default/workspaces-dotted"]
-  button[data-skin="transparent"][style*="system-accent-color"] {
-  color: var(--aurora-accent-color-strong) !important;
-  background: var(--aurora-accent-color-strong) !important;
-  box-shadow: 0 0 7px var(--aurora-accent-glass-glow) !important;
-}
-
-/* Badge */
-.ft-bar-item-badge {
-  min-width: 13px !important;
-  height: 13px !important;
-  box-sizing: border-box;
-  color: rgb(255 255 255 / 0.96) !important;
-  background: var(--aurora-accent-glass-hover) !important;
-  border: 1px solid var(--aurora-accent-glass-border);
-  backdrop-filter: blur(5px) saturate(1.35);
-  -webkit-backdrop-filter: blur(5px) saturate(1.35);
+  background: linear-gradient(
+    135deg,
+    rgba(219, 234, 254, 0.92),
+    rgba(191, 219, 254, 0.78)
+  ) !important;
+  border: 1px solid rgba(59, 130, 246, 0.34) !important;
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.24),
-    0 1px 5px rgb(0 0 0 / 0.2) !important;
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 6px rgba(37, 99, 235, 0.08) !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+
+  &::before {
+    content: "" !important;
+    display: inline-block !important;
+    width: 15px !important;
+    height: 15px !important;
+    margin-right: 5px !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='3' ry='3'/%3E%3Cline x1='16' y1='2' x2='16' y2='6'/%3E%3Cline x1='8' y1='2' x2='8' y2='6'/%3E%3Cline x1='3' y1='10' x2='21' y2='10'/%3E%3C/svg%3E") !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    flex-shrink: 0 !important;
+  }
+
+  &::after {
+    content: "▾" !important;
+    display: inline-block !important;
+    font-size: 11px !important;
+    color: #334155 !important;
+    margin-left: 5px !important;
+  }
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(191, 219, 254, 0.96),
+      rgba(147, 197, 253, 0.85)
+    ) !important;
+    border-color: rgba(37, 99, 235, 0.48) !important;
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 4px 10px rgba(37, 99, 235, 0.16) !important;
+  }
+}
+
+/* 2. Music Pill in Poni Bar (Matches Reference Image '2. Music') */
+.ft-bar-item[id="@aurora/mp3-player"] {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  padding: 4px 12px !important;
+  border-radius: 9999px !important;
+  background: linear-gradient(
+    135deg,
+    rgba(219, 234, 254, 0.92),
+    rgba(191, 219, 254, 0.78)
+  ) !important;
+  border: 1px solid rgba(59, 130, 246, 0.34) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 2px 6px rgba(37, 99, 235, 0.08) !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+
+  svg {
+    color: #2563eb !important;
+  }
+
+  &::after {
+    content: "Music ▾" !important;
+    display: inline-block !important;
+    font-size: 12.5px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    margin-left: 5px !important;
+  }
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(191, 219, 254, 0.96),
+      rgba(147, 197, 253, 0.85)
+    ) !important;
+    border-color: rgba(37, 99, 235, 0.48) !important;
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 4px 10px rgba(37, 99, 235, 0.16) !important;
+  }
+}
+
+/* 3. Battery Pill in Poni Bar */
+.ft-bar-item[id="@default/power"] {
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  padding: 3px 10px !important;
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.55) !important;
+  border: 1px solid rgba(203, 213, 225, 0.75) !important;
+}
+
+/* 4. Red Notification Badge (Matches Reference Image '4. Notifikasi') */
+.ft-bar-item-badge {
+  min-width: 15px !important;
+  height: 15px !important;
+  padding: 0 4px !important;
+  box-sizing: border-box;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  background: #ef4444 !important;
+  border: 1.5px solid #ffffff !important;
+  border-radius: 9999px !important;
+  box-shadow: 0 2px 6px rgba(239, 68, 68, 0.45) !important;
 }
