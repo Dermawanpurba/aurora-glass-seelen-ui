@@ -1,1 +1,1 @@
-return [icon("IoMusicalNotes"), " MP3"];
+return icon("IoMusicalNotes");
