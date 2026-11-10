@@ -1038,3 +1038,139 @@
 .media-slider-row button {
   flex-shrink: 0;
 }
+
+
+/* =========================================================================
+   Light Frosted Glass Putih-Biru Theme Overrides for Native Media Popup
+   ========================================================================= */
+
+.media-popup {
+  background: linear-gradient(
+    145deg,
+    rgba(248, 251, 255, 0.96) 0%,
+    rgba(230, 241, 255, 0.94) 100%
+  ) !important;
+  border: 1px solid rgba(255, 255, 255, 0.98) !important;
+  backdrop-filter: blur(28px) saturate(190%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(190%) !important;
+  box-shadow:
+    0 20px 44px -6px rgba(15, 23, 42, 0.22),
+    0 6px 16px -3px rgba(37, 99, 235, 0.12),
+    inset 0 1px 0 #ffffff !important;
+  border-radius: 22px !important;
+  color: #0f172a !important;
+
+  .media-control-label {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    font-size: 11.5px !important;
+  }
+
+  .media-device {
+    color: #0f172a !important;
+    background: rgba(255, 255, 255, 0.75) !important;
+    border: 1px solid rgba(203, 213, 225, 0.7) !important;
+    border-radius: 12px !important;
+    box-shadow: inset 0 1px 0 #ffffff !important;
+
+    &:hover,
+    &:focus-within {
+      background: #dbeafe !important;
+      border-color: #93c5fd !important;
+      color: #1d4ed8 !important;
+    }
+
+    .media-device-name {
+      color: #0f172a !important;
+      font-weight: 600 !important;
+    }
+  }
+
+  .media-session {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(238, 245, 255, 0.88) 100%
+    ) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.98) !important;
+    box-shadow:
+      0 8px 20px -2px rgba(15, 23, 42, 0.1),
+      inset 0 1px 0 #ffffff !important;
+    border-radius: 16px !important;
+    color: #0f172a !important;
+
+    &::before {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(15, 23, 42, 0.1) 100%
+      ) !important;
+    }
+
+    .media-session-thumbnail-container {
+      border-radius: 12px !important;
+      overflow: hidden !important;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15) !important;
+    }
+
+    .media-session-thumbnail {
+      background: rgba(230, 241, 255, 0.8) !important;
+      border: 1px solid rgba(255, 255, 255, 0.9) !important;
+      border-radius: 12px !important;
+    }
+
+    .media-session-info {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.85),
+        rgba(240, 246, 255, 0.95)
+      ) !important;
+      border-top: 1px solid rgba(203, 213, 225, 0.6) !important;
+      color: #0f172a !important;
+    }
+
+    .media-session-title {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+      font-size: 13.5px !important;
+      text-shadow: none !important;
+    }
+
+    .media-session-author {
+      color: #475569 !important;
+      font-weight: 500 !important;
+      font-size: 11.5px !important;
+      text-shadow: none !important;
+    }
+
+    .media-session-actions {
+      button {
+        color: #0f172a !important;
+
+        &:hover,
+        &:focus-visible {
+          color: #2563eb !important;
+          transform: translateY(-1px) scale(1.1) !important;
+          filter: drop-shadow(0 2px 6px rgba(37, 99, 235, 0.35)) !important;
+        }
+
+        .slu-icon,
+        .slu-icon > svg {
+          color: #0f172a !important;
+          filter: none !important;
+        }
+      }
+
+      button:nth-child(2) {
+        color: #0f172a !important;
+      }
+    }
+  }
+
+  .media-control-volume {
+    input[type="range"] {
+      accent-color: #2563eb !important;
+    }
+  }
+}
