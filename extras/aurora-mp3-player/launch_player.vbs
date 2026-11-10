@@ -1,23 +1,25 @@
-Set WshShell = CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
+Set shell = CreateObject("WScript.Shell")
 
-' Try activating existing window first
-If WshShell.AppActivate("Aurora MP3") Then
-    WScript.Quit 0
-End If
+appHtml = "C:\Users\User\Tools\AuroraMP3\app\index.html"
+fileUrl = "file:///" & Replace(appHtml, "\", "/")
 
-appHtml = WshShell.ExpandEnvironmentStrings("%APPDATA%\com.seelen.seelen-ui\plugins\aurora-mp3-player\app\index.html")
-profileDir = WshShell.ExpandEnvironmentStrings("%LOCALAPPDATA%\AuroraMP3PlayerProfile")
-url = "file:///" & Replace(appHtml, "\", "/")
+edgePaths = Array( _
+  "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe", _
+  "C:\Program Files\Microsoft\Edge\Application\msedge.exe", _
+  shell.ExpandEnvironmentStrings("%LocalAppData%\Microsoft\Edge\Application\msedge.exe") _
+)
 
-edgePath = "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-If Not fso.FileExists(edgePath) Then
-    edgePath = "C:\Program Files\Microsoft\Edge\Application\msedge.exe"
-End If
+launched = False
+For Each p In edgePaths
+  If fso.FileExists(p) Then
+    cmd = """" & p & """ --app=""" & fileUrl & """ --window-size=440,680 --window-position=420,48"
+    shell.Run cmd, 1, False
+    launched = True
+    Exit For
+  End If
+Next
 
-If fso.FileExists(edgePath) Then
-    cmd = """" & edgePath & """ --user-data-dir=""" & profileDir & """ --app=""" & url & """ --window-size=460,620 --window-position=410,46"
-    WshShell.Run cmd, 1, False
-Else
-    WshShell.Run """" & appHtml & """", 1, False
+If Not launched Then
+  shell.Run """" & appHtml & """", 1, False
 End If

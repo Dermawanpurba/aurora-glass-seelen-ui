@@ -9,8 +9,7 @@ metadata:
 icon: IoMusicalNotes
 target: "@seelen/fancy-toolbar"
 plugin:
-  scopes:
-    - Media
+  scopes: []
   template: !include plugin/template.js
   tooltip: !include plugin/tooltip.js
-  onClickV2: open("C:\\Users\\User\\AppData\\Roaming\\com.seelen.seelen-ui\\plugins\\aurora-mp3-player\\launch_player.vbs")
+  onClickV2: open("C:\\Users\\User\\Tools\\AuroraMP3\\launch_player.vbs")
