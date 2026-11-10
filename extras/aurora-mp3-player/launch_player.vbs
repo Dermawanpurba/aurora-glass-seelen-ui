@@ -10,10 +10,16 @@ edgePaths = Array( _
   shell.ExpandEnvironmentStrings("%LocalAppData%\Microsoft\Edge\Application\msedge.exe") _
 )
 
+' Centered directly under Dynamic Island: 1280x800 resolution -> left: 450, top: 36, width: 380, height: 530
+windowW = 380
+windowH = 530
+windowX = 450
+windowY = 36
+
 launched = False
 For Each p In edgePaths
   If fso.FileExists(p) Then
-    cmd = """" & p & """ --app=""" & fileUrl & """ --window-size=440,680 --window-position=420,48"
+    cmd = """" & p & """ --app=""" & fileUrl & """ --window-size=" & windowW & "," & windowH & " --window-position=" & windowX & "," & windowY
     shell.Run cmd, 1, False
     launched = True
     Exit For

@@ -1,5 +1,9 @@
-.calendar-popup {
+﻿.calendar-popup {
+  border-radius: 24px !important;
   color: rgb(255 255 255 / 0.96) !important;
+  box-shadow:
+    0 18px 40px -4px rgba(0, 0, 0, 0.75),
+    0 0 0 1.5px rgba(255, 255, 255, 0.22) !important;
 
   .calendar-header .calendar-date {
     color: #ffffff !important;
