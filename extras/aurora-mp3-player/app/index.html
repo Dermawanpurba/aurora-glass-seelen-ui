@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id" class="dark">
 <head>
   <meta charset="UTF-8" />
@@ -1108,6 +1108,23 @@
       return c.toDataURL('image/png');
     }
 
+    function initMediaSessionGlobalHandlers() {
+      if (!('mediaSession' in navigator)) return;
+      try {
+        navigator.mediaSession.setActionHandler('play', () => playAudio());
+        navigator.mediaSession.setActionHandler('pause', () => pauseAudio());
+        navigator.mediaSession.setActionHandler('previoustrack', () => playPrevious());
+        navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+          if (details.seekTime != null && isFinite(audio.duration)) {
+            audio.currentTime = details.seekTime;
+          }
+        });
+      } catch (e) {
+        console.warn('Init MediaSession handlers error:', e);
+      }
+    }
+
     function updateMediaSession(track, pack) {
       if (!('mediaSession' in navigator) || !track) return;
       try {
@@ -1118,16 +1135,8 @@
           album: pack ? `Paket: ${pack.name}` : 'Seelen UI Music Pack',
           artwork: [{ src: artUrl, sizes: '512x512', type: 'image/png' }]
         });
-
-        navigator.mediaSession.setActionHandler('play', () => playAudio());
-        navigator.mediaSession.setActionHandler('pause', () => pauseAudio());
-        navigator.mediaSession.setActionHandler('previoustrack', () => playPrevious());
-        navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
-        navigator.mediaSession.setActionHandler('seekto', (details) => {
-          if (details.seekTime != null && isFinite(audio.duration)) {
-            audio.currentTime = details.seekTime;
-          }
-        });
+        navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+        initMediaSessionGlobalHandlers();
       } catch (e) {
         console.warn('MediaSession update error:', e);
       }
@@ -1152,6 +1161,7 @@
       }
       currentObjectUrl = URL.createObjectURL(track.blob);
       audio.src = currentObjectUrl;
+      audio.currentTime = 0;
 
       document.getElementById('nowTitle').textContent = track.title;
       document.getElementById('nowArtist').textContent = `${track.artist || 'MP3 Audio'} • ${activePack ? activePack.name : 'Paket Musik'}`;
@@ -1210,7 +1220,13 @@
         if (nextIdx < currentTracks.length) {
           loadAndPlayTrack(nextIdx);
         } else if (repeatMode === 'all') {
-          loadAndPlayTrack(0);
+          if (currentTracks.length === 1) {
+            audio.currentTime = 0;
+            playAudio();
+            showToast(`Memutar ulang: ${currentTracks[0].title}`);
+          } else {
+            loadAndPlayTrack(0);
+          }
         } else {
           pauseAudio();
         }
@@ -1221,6 +1237,12 @@
       if (!currentTracks.length) return;
       if (audio.currentTime > 3) {
         audio.currentTime = 0;
+        return;
+      }
+      if (currentTracks.length === 1) {
+        audio.currentTime = 0;
+        playAudio();
+        showToast(`Memutar ulang: ${currentTracks[0].title}`);
         return;
       }
       const prevIdx = currentIndex > 0 ? currentIndex - 1 : currentTracks.length - 1;
@@ -1663,3 +1685,4 @@
   </script>
 </body>
 </html>
+

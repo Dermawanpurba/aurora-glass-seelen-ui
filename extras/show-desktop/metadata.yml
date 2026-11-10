@@ -1,0 +1,19 @@
+id: "@default/weg-show-desktop"
+metadata:
+  displayName:
+    en: "Show Desktop"
+    id: "Tampilkan Desktop"
+  description:
+    en: "Show Desktop"
+    id: "Tampilkan Desktop"
+icon: PiDesktopDuotone
+target: "@seelen/weg"
+plugin:
+  scopes: []
+  render: |-
+    return "@seelen/weg::show-desktop";
+  tooltip: |-
+    return "Tampilkan Desktop";
+  onClick: |-
+    open("C:\\Users\\User\\Tools\\AuroraScripts\\show_desktop.vbs");
+  onClickV2: open("C:\\Users\\User\\Tools\\AuroraScripts\\show_desktop.vbs")

@@ -1,4 +1,4 @@
-.taskbar {
+﻿.taskbar {
   container-name: aurora-dock-wave;
   container-type: normal;
   isolation: isolate;
@@ -64,6 +64,7 @@
   &::before {
     content: "";
     position: absolute;
+    pointer-events: none !important;
   }
 }
 
@@ -672,31 +673,21 @@
   }
 
   .weg-item-drag-container
-    > .media-session-container:has(.media-session-actions button:first-child:focus) {
-    animation:
-      aurora-media-cover-flip-previous 620ms cubic-bezier(0.22, 0.72, 0.2, 1) 70ms both,
-      var(--aurora-media-status-animation, none) !important;
-  }
-
-  .weg-item-drag-container
-    > .media-session-container:has(.media-session-actions button:last-child:focus) {
-    animation:
-      aurora-media-cover-flip-next 620ms cubic-bezier(0.22, 0.72, 0.2, 1) 70ms both,
-      var(--aurora-media-status-animation, none) !important;
+    > .media-session-container:has(.media-session-actions button:focus) {
+    animation: none !important;
+    transform: none !important;
   }
 
   .weg-item-drag-container
     > .media-session-container:has(
-      .media-session-actions button:is(:first-child, :last-child):focus
-    )::before {
-    animation: aurora-media-flip-glass-face 620ms cubic-bezier(0.22, 0.72, 0.2, 1) 70ms both !important;
-  }
-
+      .media-session-actions button:focus
+    )::before,
   .weg-item-drag-container
     > .media-session-container:has(
-      .media-session-actions button:is(:first-child, :last-child):focus
+      .media-session-actions button:focus
     )::after {
-    animation: aurora-media-flip-glass-edge 620ms cubic-bezier(0.22, 0.72, 0.2, 1) 70ms both !important;
+    display: none !important;
+    pointer-events: none !important;
   }
 
   .weg-item-drag-container
@@ -798,7 +789,7 @@
 
   .media-session-container .media-session-actions {
     position: absolute !important;
-    z-index: 1;
+    z-index: 10 !important;
     inset: 0 !important;
     display: block !important;
     box-sizing: border-box;
@@ -811,26 +802,40 @@
 
   .media-session-container .media-session-actions button {
     position: absolute !important;
-    top: 25% !important;
+    top: 20% !important;
     bottom: auto !important;
     display: grid !important;
     place-items: center !important;
     width: 34% !important;
     min-width: 0 !important;
-    height: 50% !important;
+    height: 60% !important;
     min-height: 0 !important;
     padding: 0 !important;
     color: white !important;
     background: transparent !important;
     border: 0 !important;
-    border-radius: 0 !important;
+    border-radius: 8px !important;
     box-shadow: none !important;
-    opacity: 0;
-    pointer-events: auto;
+    opacity: 0.9 !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+    z-index: 12 !important;
     transform: none !important;
     transition:
       opacity 90ms ease,
+      background 90ms ease,
       filter 90ms ease !important;
+
+    &:hover {
+      opacity: 1 !important;
+      background: rgba(255, 255, 255, 0.22) !important;
+      filter: brightness(1.2) !important;
+    }
+
+    &:active {
+      transform: scale(0.92) !important;
+      background: rgba(255, 255, 255, 0.32) !important;
+    }
   }
 
   .media-session-container .media-session-actions button :is(i, svg) {
