@@ -33,7 +33,7 @@ body {
 /* =========================================================================
    Light Frosted Glass Putih-Biru Poni Top Bar
    - Fits 100% inside 32px Tauri toolbar window (No bottom clipping!)
-   - Auto-hides when window is full-screen (.ft-bar-hidden), reveals on top hover
+   - Stable, flicker-free open/close with hover bridge & hide delay
    ========================================================================= */
 
 #root {
@@ -48,7 +48,7 @@ body {
   position: relative !important;
 }
 
-/* Top-edge hover sensor for revealing Poni bar when a window is full-screen */
+/* Seamless top-edge trigger zone (y: 0 to 6px) */
 #root::before {
   content: "" !important;
   display: block !important;
@@ -56,8 +56,8 @@ body {
   top: 0 !important;
   left: 50% !important;
   transform: translateX(-50%) !important;
-  width: min(760px, 68vw) !important;
-  height: 4px !important;
+  width: min(760px, 70vw) !important;
+  height: 6px !important;
   background: transparent !important;
   pointer-events: auto !important;
   z-index: 1 !important;
@@ -104,10 +104,24 @@ body {
   pointer-events: auto !important;
   transform-origin: top center !important;
   transition:
-    transform 190ms cubic-bezier(0.2, 0.9, 0.3, 1),
-    opacity 150ms ease,
+    transform 180ms cubic-bezier(0.2, 0.9, 0.3, 1),
+    opacity 140ms ease,
     box-shadow 180ms ease,
     background 180ms ease !important;
+  transition-delay: 0ms !important;
+
+  /* Invisible hover cushion around the pill so cursor never loses hover */
+  &::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -10px !important;
+    bottom: -8px !important;
+    left: -18px !important;
+    right: -18px !important;
+    background: transparent !important;
+    pointer-events: inherit !important;
+    z-index: -1 !important;
+  }
 
   > .bg-layers {
     display: none !important;
@@ -131,21 +145,26 @@ body {
   }
 }
 
-/* Hide Poni Bar when a full-screen / maximized window overlaps it */
+/* Hide Poni Bar ONLY when overlapped (.ft-bar-hidden) AND not hovered */
 .ft-bar.ft-bar-hidden:not(:hover),
 .ft-bar[data-hidden="true"]:not(:hover) {
-  transform: translate3d(0, calc(-100% - 10px), 0) scale(0.95) !important;
+  transform: translate3d(0, calc(-100% - 10px), 0) scale(0.96) !important;
   opacity: 0 !important;
   pointer-events: none !important;
+  transition-delay: 220ms !important;
 }
 
-/* Reveal Poni Bar when mouse hovers top sensor or bar */
+/* Instant reveal & lock open when hovering top edge or bar */
 #root:hover .ft-bar,
+#root:hover .ft-bar.ft-bar-hidden,
+#root:hover .ft-bar[data-hidden="true"],
 .ft-bar:hover,
+.ft-bar.ft-bar-hidden:hover,
 .ft-bar:focus-within {
   transform: translate3d(0, 0, 0) scale(1) !important;
   opacity: 1 !important;
   pointer-events: auto !important;
+  transition-delay: 0ms !important;
 }
 
 /* Base items inside the Poni Bar */
