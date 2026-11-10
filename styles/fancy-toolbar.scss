@@ -263,6 +263,26 @@ body {
   }
 }
 
+/* Aurora MP3 Music Pack Pill in Dynamic Island */
+.ft-bar-item[id="@aurora/mp3-player"] {
+  color: #38bdf8 !important;
+  opacity: 1 !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+  border-radius: 9999px !important;
+  background: rgba(56, 189, 248, 0.14) !important;
+  border: 1px solid rgba(56, 189, 248, 0.32) !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+
+  &:hover {
+    color: #ffffff !important;
+    background: rgba(56, 189, 248, 0.28) !important;
+    border-color: rgba(56, 189, 248, 0.55) !important;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.35) !important;
+  }
+}
+
 /* Non-clickable Separator symbols only (| and -) */
 .ft-bar-item:not(.ft-bar-item-clickable):not([id^="@"]) {
   opacity: 0.38 !important;

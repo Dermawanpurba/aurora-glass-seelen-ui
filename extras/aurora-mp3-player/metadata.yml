@@ -1,0 +1,16 @@
+id: "@aurora/mp3-player"
+metadata:
+  displayName:
+    en: "Aurora MP3 Music Pack Player"
+    id: "Pemutar Paket Musik MP3 Aurora"
+  description:
+    en: "Upload MP3 lists into ready-to-play Music Packs integrated with Seelen Dynamic Island"
+    id: "Upload daftar MP3 menjadi Paket Musik siap putar di Seelen Dynamic Island"
+icon: IoMusicalNotes
+target: "@seelen/fancy-toolbar"
+plugin:
+  scopes:
+    - Media
+  template: !include plugin/template.js
+  tooltip: !include plugin/tooltip.js
+  onClickV2: open("C:\\Users\\User\\AppData\\Roaming\\com.seelen.seelen-ui\\plugins\\aurora-mp3-player\\launch_player.vbs")

@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aurora MP3 Music Pack — Seelen UI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #080b12;
+      --bg-surface: rgba(15, 21, 35, 0.95);
+      --bg-elevated: rgba(24, 33, 52, 0.88);
+      --bg-hover: rgba(38, 52, 80, 0.92);
+      --border-subtle: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.22);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --accent-primary: #38bdf8;
+      --accent-blue: #2563eb;
+      --accent-emerald: #10b981;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.14) 0%, transparent 55%),
+        radial-gradient(circle at 85% 90%, rgba(37, 99, 235, 0.12) 0%, transparent 50%),
+        var(--bg-base);
+      color: var(--text-primary);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Maintenance v2 High-Contrast Dark Elevation Shadow System */
+    .card-elevated {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      box-shadow:
+        0 8px 16px -2px rgba(2, 6, 23, 0.55),
+        0 4px 6px -2px rgba(2, 6, 23, 0.35),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+      transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    /* Top Dynamic Island Capsule Player Deck */
+    .island-deck {
+      margin: 12px 14px 8px 14px;
+      padding: 14px 16px;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(12, 16, 28, 0.98), rgba(20, 28, 46, 0.96));
+      border: 1.5px solid var(--border-strong);
+      box-shadow:
+        0 14px 32px -4px rgba(0, 0, 0, 0.65),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .island-top-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .disc-art {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
+      border: 1px solid rgba(255, 255, 255, 0.26);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      box-shadow: 0 6px 16px rgba(14, 165, 233, 0.28);
+      overflow: hidden;
+    }
+
+    .disc-art svg {
+      width: 26px;
+      height: 26px;
+      color: #ffffff;
+      transition: transform 0.3s ease;
+    }
+
+    .disc-art.playing svg {
+      animation: pulse-scale 2.2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-scale {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    .track-meta {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .pack-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      width: fit-content;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-primary);
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 2px 8px;
+      border-radius: 999px;
+    }
+
+    .pack-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 6px var(--accent-emerald);
+    }
+
+    .now-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .now-artist {
+      font-size: 12px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .visualizer-box {
+      width: 84px;
+      height: 36px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #visualizerCanvas {
+      width: 84px;
+      height: 36px;
+      display: block;
+    }
+
+    /* Progress Scrubber */
+    .scrubber-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .time-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      min-width: 36px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .time-label.right {
+      text-align: right;
+    }
+
+    .range-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      flex: 1;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      outline: none;
+      cursor: pointer;
+      position: relative;
+      transition: height 0.15s ease, background 0.15s ease;
+    }
+
+    .range-slider:hover {
+      height: 8px;
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .range-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid var(--accent-primary);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .range-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
+    }
+
+    /* Playback Controls Row */
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .main-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.26);
+      transform: translateY(-1px);
+    }
+
+    .icon-btn:active {
+      transform: translateY(0) scale(0.96);
+    }
+
+    .icon-btn.active {
+      color: var(--accent-primary);
+      background: rgba(56, 189, 248, 0.16);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+    }
+
+    .play-btn:hover {
+      background: linear-gradient(135deg, #7dd3fc, #3b82f6);
+      box-shadow: 0 8px 22px rgba(56, 189, 248, 0.55);
+    }
+
+    .volume-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      width: 115px;
+    }
+
+    /* Music Packs Ribbon (Paket Musik Selector) */
+    .packs-section {
+      padding: 0 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+    }
+
+    .action-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill-btn {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text-primary);
+      font-size: 11.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .pill-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.28);
+      transform: translateY(-1px);
+    }
+
+    .pill-btn.primary {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.24), rgba(37, 99, 235, 0.28));
+      border-color: rgba(56, 189, 248, 0.48);
+      color: #ffffff;
+    }
+
+    .pill-btn.primary:hover {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.36), rgba(37, 99, 235, 0.4));
+    }
+
+    .packs-tabs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      scrollbar-width: thin;
+    }
+
+    .packs-tabs::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .packs-tabs::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+    }
+
+    .pack-tab {
+      flex-shrink: 0;
+      padding: 6px 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .pack-tab:hover {
+      background: var(--bg-elevated);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    .pack-tab.active {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(37, 99, 235, 0.25));
+      border-color: var(--accent-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+    }
+
+    .pack-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--text-primary);
+    }
+
+    /* Playlist Container */
+    .playlist-container {
+      flex: 1;
+      margin: 8px 14px 14px 14px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .playlist-toolbar {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      background: rgba(10, 14, 24, 0.55);
+    }
+
+    .search-box {
+      flex: 1;
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 30px;
+      padding: 0 10px 0 30px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(15, 23, 42, 0.8);
+      color: var(--text-primary);
+      font-size: 12px;
+      outline: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+    }
+
+    .track-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .track-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .track-list::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+    }
+
+    .track-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 11px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .track-row:hover {
+      background: var(--bg-elevated);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .track-row.active {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.2), rgba(37, 99, 235, 0.18));
+      border-color: rgba(56, 189, 248, 0.42);
+    }
+
+    .track-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      width: 22px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .track-row.active .track-num {
+      color: var(--accent-emerald);
+      font-weight: 700;
+    }
+
+    .track-info {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .track-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-row.active .track-title {
+      color: var(--accent-primary);
+    }
+
+    .track-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .track-duration {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+    }
+
+    .track-delete-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 7px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      transition: all 0.14s ease;
+    }
+
+    .track-row:hover .track-delete-btn {
+      opacity: 1;
+    }
+
+    .track-delete-btn:hover {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+
+    /* Empty State & Dropzone */
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 28px 20px;
+      gap: 10px;
+      border: 1.5px dashed rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      margin: 8px;
+      transition: all 0.2s ease;
+    }
+
+    .empty-state.dragover {
+      border-color: var(--accent-primary);
+      background: rgba(56, 189, 248, 0.08);
+    }
+
+    .empty-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      color: var(--accent-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .empty-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .empty-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      max-width: 260px;
+      line-height: 1.45;
+    }
+
+    /* Modal Dialog for New Music Pack */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(2, 6, 23, 0.78);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 16px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 340px;
+      padding: 18px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .text-input {
+      width: 100%;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(15, 23, 42, 0.9);
+      color: #ffffff;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .text-input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.25);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--accent-primary);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px 14px;
+      border-radius: 999px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.22s ease;
+      z-index: 1000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Dynamic Island Player Deck -->
+  <section class="island-deck">
+    <div class="island-top-row">
+      <div class="disc-art" id="discArt">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18V5l12-2v13"></path>
+          <circle cx="6" cy="18" r="3"></circle>
+          <circle cx="18" cy="16" r="3"></circle>
+        </svg>
+      </div>
+      <div class="track-meta">
+        <div class="pack-badge">
+          <span class="pack-badge-dot"></span>
+          <span id="activePackBadge">PAKET UTAMA</span>
+        </div>
+        <div class="now-title" id="nowTitle">Pilih atau Upload Paket .MP3</div>
+        <div class="now-artist" id="nowArtist">Siap putar otomatis & tersimpan permanen</div>
+      </div>
+      <div class="visualizer-box">
+        <canvas id="visualizerCanvas" width="84" height="36"></canvas>
+      </div>
+    </div>
+
+    <!-- Scrubber -->
+    <div class="scrubber-row">
+      <span class="time-label" id="currentTimeLabel">00:00</span>
+      <input type="range" id="seekSlider" class="range-slider" min="0" max="100" value="0" step="0.1" aria-label="Seek Waktu Lagu" />
+      <span class="time-label right" id="totalTimeLabel">00:00</span>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-row">
+      <div class="main-controls">
+        <button class="icon-btn" id="shuffleBtn" title="Acak Lagu (Shuffle)" aria-label="Shuffle">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 3 21 3 21 8"></polyline>
+            <line x1="4" y1="20" x2="21" y2="3"></line>
+            <polyline points="21 16 21 21 16 21"></polyline>
+            <line x1="15" y1="15" x2="21" y2="21"></line>
+            <line x1="4" y1="4" x2="9" y2="9"></line>
+          </svg>
+        </button>
+        <button class="icon-btn" id="prevBtn" title="Lagu Sebelumnya" aria-label="Previous">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="19 20 9 12 19 4 19 20"></polygon>
+            <line x1="5" y1="19" x2="5" y2="5"></line>
+          </svg>
+        </button>
+        <button class="icon-btn play-btn" id="playPauseBtn" title="Putar / Jeda (Spasi)" aria-label="Play or Pause">
+          <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="6 4 20 12 6 20 6 4"></polygon>
+          </svg>
+          <svg id="pauseIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+            <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+            <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+          </svg>
+        </button>
+        <button class="icon-btn" id="nextBtn" title="Lagu Berikutnya" aria-label="Next">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="5 4 15 12 5 20 5 4"></polygon>
+            <line x1="19" y1="5" x2="19" y2="19"></line>
+          </svg>
+        </button>
+        <button class="icon-btn active" id="repeatBtn" title="Ulangi Paket (Repeat All)" aria-label="Repeat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="17 1 21 5 17 9"></polyline>
+            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+            <polyline points="7 23 3 19 7 15"></polyline>
+            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="volume-group">
+        <button class="icon-btn" id="muteBtn" style="width:30px;height:30px;border:none;background:transparent;" title=" Suara / Mute" aria-label="Mute">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          </svg>
+        </button>
+        <input type="range" id="volumeSlider" class="range-slider" min="0" max="1" step="0.02" value="0.9" aria-label="Volume" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Music Packs Section -->
+  <section class="packs-section">
+    <div class="section-header">
+      <span class="section-title">Paket Musik Siap Putar</span>
+      <div class="action-group">
+        <button class="pill-btn" id="newPackBtn" title="Buat Paket Musik Baru">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+          Paket Baru
+        </button>
+        <button class="pill-btn primary" id="uploadFilesBtn" title="Upload Banyak File .MP3 ke Paket Ini">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          Upload List .MP3
+        </button>
+        <button class="pill-btn" id="uploadFolderBtn" title="Upload 1 Folder Penuh .MP3 jadi Paket Musik">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          Folder
+        </button>
+      </div>
+    </div>
+
+    <div class="packs-tabs" id="packsTabs"></div>
+  </section>
+
+  <!-- Hidden File Inputs -->
+  <input type="file" id="mp3FileInput" accept=".mp3,audio/*" multiple style="display:none;" />
+  <input type="file" id="mp3FolderInput" webkitdirectory directory multiple style="display:none;" />
+
+  <!-- Tracklist Table / Card -->
+  <section class="playlist-container card-elevated" id="dropZone">
+    <div class="playlist-toolbar">
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Cari lagu di dalam paket ini..." />
+      </div>
+      <button class="pill-btn" id="deletePackBtn" title="Hapus Paket Ini" style="color:#f87171;border-color:rgba(248,113,113,0.25);">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="3 6 5 6 21 6"></polyline>
+          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="track-list" id="trackList"></div>
+  </section>
+
+  <!-- Modal Buat Paket Musik Baru -->
+  <div class="modal-backdrop" id="newPackModal">
+    <div class="modal-card card-elevated">
+      <div class="modal-title">Buat Paket Musik Baru</div>
+      <input type="text" id="newPackNameInput" class="text-input" placeholder="Nama Paket (misal: Fokus Coding, Lagu Santai)" maxlength="40" />
+      <div class="modal-actions">
+        <button class="pill-btn" id="cancelPackModalBtn">Batal</button>
+        <button class="pill-btn primary" id="confirmPackModalBtn">Simpan & Pilih Paket</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toastBox"></div>
+
+  <script>
+    // =========================================================================
+    // 1. IndexedDB Persistent Music Pack Engine (AuroraMusicPackDB)
+    // =========================================================================
+    const DB_NAME = 'AuroraMusicPackDB';
+    const DB_VERSION = 1;
+    let db = null;
+
+    function openDB() {
+      return new Promise((resolve, reject) => {
+        const req = indexedDB.open(DB_NAME, DB_VERSION);
+        req.onupgradeneeded = (e) => {
+          const d = e.target.result;
+          if (!d.objectStoreNames.contains('packs')) {
+            d.createObjectStore('packs', { keyPath: 'id' });
+          }
+          if (!d.objectStoreNames.contains('tracks')) {
+            const store = d.createObjectStore('tracks', { keyPath: 'id' });
+            store.createIndex('by_pack', 'packId', { unique: false });
+          }
+        };
+        req.onsuccess = () => {
+          db = req.result;
+          resolve(db);
+        };
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    function dbGetAllPacks() {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('packs', 'readonly');
+        const req = tx.objectStore('packs').getAll();
+        req.onsuccess = () => resolve(req.result || []);
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    function dbSavePack(pack) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('packs', 'readwrite');
+        tx.objectStore('packs').put(pack);
+        tx.oncomplete = () => resolve(pack);
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    function dbDeletePack(packId) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction(['packs', 'tracks'], 'readwrite');
+        tx.objectStore('packs').delete(packId);
+        const trackStore = tx.objectStore('tracks');
+        const idx = trackStore.index('by_pack');
+        const req = idx.openCursor(IDBKeyRange.only(packId));
+        req.onsuccess = (e) => {
+          const cursor = e.target.result;
+          if (cursor) {
+            cursor.delete();
+            cursor.continue();
+          }
+        };
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    function dbGetTracksByPack(packId) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('tracks', 'readonly');
+        const idx = tx.objectStore('tracks').index('by_pack');
+        const req = idx.getAll(IDBKeyRange.only(packId));
+        req.onsuccess = () => {
+          const list = req.result || [];
+          list.sort((a, b) => (a.order || 0) - (b.order || 0));
+          resolve(list);
+        };
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    function dbGetAllTracksCountByPack() {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('tracks', 'readonly');
+        const req = tx.objectStore('tracks').getAll();
+        req.onsuccess = () => {
+          const counts = {};
+          for (const t of (req.result || [])) {
+            counts[t.packId] = (counts[t.packId] || 0) + 1;
+          }
+          resolve(counts);
+        };
+        req.onerror = () => reject(req.error);
+      });
+    }
+
+    function dbSaveTrack(track) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('tracks', 'readwrite');
+        tx.objectStore('tracks').put(track);
+        tx.oncomplete = () => resolve(track);
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    function dbDeleteTrack(trackId) {
+      return new Promise((resolve, reject) => {
+        const tx = db.transaction('tracks', 'readwrite');
+        tx.objectStore('tracks').delete(trackId);
+        tx.oncomplete = () => resolve();
+        tx.onerror = () => reject(tx.error);
+      });
+    }
+
+    // =========================================================================
+    // 2. Player State & Audio Engine
+    // =========================================================================
+    let packs = [];
+    let packCounts = {};
+    let activePackId = localStorage.getItem('aurora_active_pack_id') || 'pack-default';
+    let currentTracks = [];
+    let currentIndex = -1;
+    let isPlaying = false;
+    let isShuffle = false;
+    let repeatMode = 'all'; // 'all' | 'one' | 'off'
+    let currentObjectUrl = null;
+
+    const audio = new Audio();
+    audio.preload = 'metadata';
+
+    // Web Audio API Visualizer
+    let audioCtx = null;
+    let analyser = null;
+    let sourceNode = null;
+    const canvas = document.getElementById('visualizerCanvas');
+    const ctx = canvas.getContext('2d');
+
+    function initAudioVisualizer() {
+      if (audioCtx) return;
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContextClass();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64;
+        sourceNode = audioCtx.createMediaElementSource(audio);
+        sourceNode.connect(analyser);
+        analyser.connect(audioCtx.destination);
+        drawVisualizer();
+      } catch (err) {
+        console.warn('Visualizer fallback:', err);
+      }
+    }
+
+    function drawVisualizer() {
+      requestAnimationFrame(drawVisualizer);
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const bars = 16;
+      const barWidth = 3.5;
+      const gap = (w - bars * barWidth) / (bars - 1);
+
+      let dataArray = new Uint8Array(bars);
+      if (analyser && isPlaying) {
+        const freqData = new Uint8Array(analyser.frequencyBinCount);
+        analyser.getByteFrequencyData(freqData);
+        for (let i = 0; i < bars; i++) {
+          dataArray[i] = freqData[i + 1] || 0;
+        }
+      }
+
+      for (let i = 0; i < bars; i++) {
+        const val = isPlaying ? dataArray[i] / 255 : 0.12;
+        const barHeight = Math.max(4, val * (h - 4));
+        const x = i * (barWidth + gap);
+        const y = (h - barHeight) / 2;
+
+        const grad = ctx.createLinearGradient(0, y, 0, y + barHeight);
+        grad.addColorStop(0, '#38bdf8');
+        grad.addColorStop(1, '#2563eb');
+        ctx.fillStyle = isPlaying ? grad : 'rgba(148, 163, 184, 0.28)';
+        ctx.beginPath();
+        ctx.roundRect(x, y, barWidth, barHeight, 2);
+        ctx.fill();
+      }
+    }
+
+    // Format seconds to MM:SS
+    function formatTime(sec) {
+      if (!sec || !isFinite(sec) || sec < 0) return '00:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      box.textContent = msg;
+      box.classList.add('show');
+      clearTimeout(box._timer);
+      box._timer = setTimeout(() => box.classList.remove('show'), 2400);
+    }
+
+    // Generate Dynamic Cover Art for Seelen UI Media Popup / Windows SMTC
+    function generateCoverArtDataUrl(title, packName) {
+      const c = document.createElement('canvas');
+      c.width = 512;
+      c.height = 512;
+      const g = c.getContext('2d');
+
+      const bg = g.createLinearGradient(0, 0, 512, 512);
+      bg.addColorStop(0, '#090d16');
+      bg.addColorStop(0.5, '#0f2942');
+      bg.addColorStop(1, '#1e3a8a');
+      g.fillStyle = bg;
+      g.fillRect(0, 0, 512, 512);
+
+      // Glow circle
+      const rad = g.createRadialGradient(256, 200, 20, 256, 200, 220);
+      rad.addColorStop(0, 'rgba(56, 189, 248, 0.45)');
+      rad.addColorStop(1, 'transparent');
+      g.fillStyle = rad;
+      g.fillRect(0, 0, 512, 512);
+
+      // Pack name
+      g.fillStyle = '#38bdf8';
+      g.font = 'bold 26px "Plus Jakarta Sans", sans-serif';
+      g.textAlign = 'center';
+      g.fillText((packName || 'AURORA MUSIC PACK').toUpperCase(), 256, 380);
+
+      // Track title
+      g.fillStyle = '#ffffff';
+      g.font = 'bold 34px "Inter", sans-serif';
+      const shortT = (title || 'MP3 Track').slice(0, 24);
+      g.fillText(shortT, 256, 430);
+
+      return c.toDataURL('image/png');
+    }
+
+    function updateMediaSession(track, pack) {
+      if (!('mediaSession' in navigator) || !track) return;
+      try {
+        const artUrl = generateCoverArtDataUrl(track.title, pack ? pack.name : 'Aurora Music Pack');
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: track.title,
+          artist: track.artist || (pack ? pack.name : 'Aurora MP3 Pack'),
+          album: pack ? `Paket: ${pack.name}` : 'Seelen UI Music Pack',
+          artwork: [{ src: artUrl, sizes: '512x512', type: 'image/png' }]
+        });
+
+        navigator.mediaSession.setActionHandler('play', () => playAudio());
+        navigator.mediaSession.setActionHandler('pause', () => pauseAudio());
+        navigator.mediaSession.setActionHandler('previoustrack', () => playPrevious());
+        navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+          if (details.seekTime != null && isFinite(audio.duration)) {
+            audio.currentTime = details.seekTime;
+          }
+        });
+      } catch (e) {
+        console.warn('MediaSession update error:', e);
+      }
+    }
+
+    // =========================================================================
+    // 3. Playback Operations
+    // =========================================================================
+    async function loadAndPlayTrack(index) {
+      if (index < 0 || index >= currentTracks.length) return;
+      initAudioVisualizer();
+      if (audioCtx && audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+      }
+
+      currentIndex = index;
+      const track = currentTracks[currentIndex];
+      const activePack = packs.find(p => p.id === activePackId);
+
+      if (currentObjectUrl) {
+        URL.revokeObjectURL(currentObjectUrl);
+      }
+      currentObjectUrl = URL.createObjectURL(track.blob);
+      audio.src = currentObjectUrl;
+
+      document.getElementById('nowTitle').textContent = track.title;
+      document.getElementById('nowArtist').textContent = `${track.artist || 'MP3 Audio'} • ${activePack ? activePack.name : 'Paket Musik'}`;
+      document.getElementById('activePackBadge').textContent = activePack ? activePack.name : 'PAKET MUSIK';
+      document.title = `▶ ${track.title} — Aurora MP3`;
+
+      renderTrackList();
+      updateMediaSession(track, activePack);
+      await playAudio();
+    }
+
+    async function playAudio() {
+      if (currentIndex === -1 && currentTracks.length > 0) {
+        return loadAndPlayTrack(0);
+      }
+      if (!audio.src) return;
+      initAudioVisualizer();
+      if (audioCtx && audioCtx.state === 'suspended') {
+        await audioCtx.resume();
+      }
+      try {
+        await audio.play();
+        isPlaying = true;
+        updatePlayPauseUI();
+        if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'playing';
+      } catch (err) {
+        console.error('Play error:', err);
+      }
+    }
+
+    function pauseAudio() {
+      audio.pause();
+      isPlaying = false;
+      updatePlayPauseUI();
+      if ('mediaSession' in navigator) navigator.mediaSession.playbackState = 'paused';
+    }
+
+    function updatePlayPauseUI() {
+      document.getElementById('playIcon').style.display = isPlaying ? 'none' : 'block';
+      document.getElementById('pauseIcon').style.display = isPlaying ? 'block' : 'none';
+      const disc = document.getElementById('discArt');
+      if (isPlaying) disc.classList.add('playing');
+      else disc.classList.remove('playing');
+    }
+
+    function playNext() {
+      if (!currentTracks.length) return;
+      if (isShuffle && currentTracks.length > 1) {
+        let nextIdx = currentIndex;
+        while (nextIdx === currentIndex) {
+          nextIdx = Math.floor(Math.random() * currentTracks.length);
+        }
+        loadAndPlayTrack(nextIdx);
+      } else {
+        const nextIdx = currentIndex + 1;
+        if (nextIdx < currentTracks.length) {
+          loadAndPlayTrack(nextIdx);
+        } else if (repeatMode === 'all') {
+          loadAndPlayTrack(0);
+        } else {
+          pauseAudio();
+        }
+      }
+    }
+
+    function playPrevious() {
+      if (!currentTracks.length) return;
+      if (audio.currentTime > 3) {
+        audio.currentTime = 0;
+        return;
+      }
+      const prevIdx = currentIndex > 0 ? currentIndex - 1 : currentTracks.length - 1;
+      loadAndPlayTrack(prevIdx);
+    }
+
+    audio.addEventListener('timeupdate', () => {
+      const cur = audio.currentTime || 0;
+      const dur = audio.duration || 0;
+      document.getElementById('currentTimeLabel').textContent = formatTime(cur);
+      document.getElementById('totalTimeLabel').textContent = formatTime(dur);
+      const slider = document.getElementById('seekSlider');
+      if (!slider._dragging && dur > 0) {
+        slider.value = (cur / dur) * 100;
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      if (repeatMode === 'one') {
+        audio.currentTime = 0;
+        playAudio();
+      } else {
+        playNext();
+      }
+    });
+
+    // =========================================================================
+    // 4. Upload List .MP3 & Metadata Extraction
+    // =========================================================================
+    function cleanTrackName(filename) {
+      return filename
+        .replace(/\.[^/.]+$/, '')
+        .replace(/^[\d\s.\-_]+/, '')
+        .replace(/[_]+/g, ' ')
+        .trim() || filename;
+    }
+
+    function probeAudioDuration(blob) {
+      return new Promise((resolve) => {
+        const tempAudio = document.createElement('audio');
+        const url = URL.createObjectURL(blob);
+        tempAudio.preload = 'metadata';
+        tempAudio.onloadedmetadata = () => {
+          const d = tempAudio.duration;
+          URL.revokeObjectURL(url);
+          resolve(isFinite(d) ? d : 0);
+        };
+        tempAudio.onerror = () => {
+          URL.revokeObjectURL(url);
+          resolve(0);
+        };
+        tempAudio.src = url;
+      });
+    }
+
+    async function handleUploadFiles(fileList, customPackName = null) {
+      const mp3Files = Array.from(fileList).filter(f =>
+        f.name.toLowerCase().endsWith('.mp3') ||
+        f.name.toLowerCase().endsWith('.flac') ||
+        f.name.toLowerCase().endsWith('.wav') ||
+        f.name.toLowerCase().endsWith('.m4a') ||
+        f.name.toLowerCase().endsWith('.ogg') ||
+        (f.type && f.type.startsWith('audio/'))
+      );
+
+      if (!mp3Files.length) {
+        showToast('Pilih file audio (.mp3, .wav, .m4a, .flac)');
+        return;
+      }
+
+      // If uploading a folder, optionally create a pack named after the folder
+      if (customPackName) {
+        const newPack = {
+          id: 'pack-' + Date.now(),
+          name: customPackName,
+          createdAt: Date.now()
+        };
+        await dbSavePack(newPack);
+        activePackId = newPack.id;
+        localStorage.setItem('aurora_active_pack_id', activePackId);
+      }
+
+      showToast(`Memproses ${mp3Files.length} lagu ke Paket Musik...`);
+      const existing = await dbGetTracksByPack(activePackId);
+      let orderBase = existing.length;
+
+      for (const file of mp3Files) {
+        const duration = await probeAudioDuration(file);
+        const rawName = cleanTrackName(file.name);
+        let artist = 'Paket Musik MP3';
+        let title = rawName;
+        if (rawName.includes(' - ')) {
+          const parts = rawName.split(' - ');
+          artist = parts[0].trim();
+          title = parts.slice(1).join(' - ').trim();
+        }
+
+        const trackObj = {
+          id: 'trk-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+          packId: activePackId,
+          title,
+          artist,
+          duration,
+          sizeBytes: file.size,
+          blob: file,
+          order: orderBase++,
+          createdAt: Date.now()
+        };
+        await dbSaveTrack(trackObj);
+      }
+
+      await refreshPacksAndTracks();
+      showToast(`${mp3Files.length} lagu tersimpan & siap putar!`);
+
+      // Auto-play immediately if nothing is playing yet
+      if (!isPlaying && currentTracks.length > 0) {
+        loadAndPlayTrack(0);
+      }
+    }
+
+    // =========================================================================
+    // 5. UI Rendering
+    // =========================================================================
+    async function refreshPacksAndTracks() {
+      packs = await dbGetAllPacks();
+      if (!packs.length) {
+        const defaultPack = {
+          id: 'pack-default',
+          name: 'Paket Utama',
+          createdAt: Date.now()
+        };
+        await dbSavePack(defaultPack);
+        packs = [defaultPack];
+      }
+
+      if (!packs.some(p => p.id === activePackId)) {
+        activePackId = packs[0].id;
+        localStorage.setItem('aurora_active_pack_id', activePackId);
+      }
+
+      packCounts = await dbGetAllTracksCountByPack();
+      currentTracks = await dbGetTracksByPack(activePackId);
+
+      renderPacksTabs();
+      renderTrackList();
+
+      const activePack = packs.find(p => p.id === activePackId);
+      if (activePack) {
+        document.getElementById('activePackBadge').textContent = activePack.name;
+      }
+    }
+
+    function renderPacksTabs() {
+      const container = document.getElementById('packsTabs');
+      container.innerHTML = '';
+
+      packs.forEach(pack => {
+        const btn = document.createElement('button');
+        btn.className = 'pack-tab' + (pack.id === activePackId ? ' active' : '');
+        const count = packCounts[pack.id] || 0;
+        btn.innerHTML = `
+          <span>${escapeHtml(pack.name)}</span>
+          <span class="pack-count">${count}</span>
+        `;
+        btn.addEventListener('click', async () => {
+          activePackId = pack.id;
+          localStorage.setItem('aurora_active_pack_id', activePackId);
+          currentIndex = -1;
+          await refreshPacksAndTracks();
+          if (currentTracks.length > 0) {
+            loadAndPlayTrack(0);
+          }
+        });
+        container.appendChild(btn);
+      });
+    }
+
+    function renderTrackList() {
+      const listEl = document.getElementById('trackList');
+      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+      listEl.innerHTML = '';
+
+      const filtered = currentTracks
+        .map((t, idx) => ({ ...t, originalIndex: idx }))
+        .filter(t => !query || t.title.toLowerCase().includes(query) || (t.artist && t.artist.toLowerCase().includes(query)));
+
+      if (!currentTracks.length) {
+        listEl.innerHTML = `
+          <div class="empty-state" id="emptyStateBox">
+            <div class="empty-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+              </svg>
+            </div>
+            <div class="empty-title">Paket Musik Masih Kosong</div>
+            <div class="empty-desc">Klik tombol <b>Upload List .MP3</b> di atas atau tarik (Drag & Drop) file .mp3 ke sini untuk membuat paket musik siap putar.</div>
+          </div>
+        `;
+        return;
+      }
+
+      if (!filtered.length) {
+        listEl.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-title">Lagu tidak ditemukan</div>
+            <div class="empty-desc">Tidak ada judul lagu yang cocok dengan kata kunci pencarian.</div>
+          </div>
+        `;
+        return;
+      }
+
+      filtered.forEach(item => {
+        const row = document.createElement('div');
+        const isCurrent = item.originalIndex === currentIndex;
+        row.className = 'track-row' + (isCurrent ? ' active' : '');
+        row.innerHTML = `
+          <div class="track-num">${isCurrent && isPlaying ? '▶' : String(item.originalIndex + 1).padStart(2, '0')}</div>
+          <div class="track-info">
+            <div class="track-title">${escapeHtml(item.title)}</div>
+            <div class="track-sub">${escapeHtml(item.artist || 'MP3 Audio')}</div>
+          </div>
+          <div class="track-duration">${formatTime(item.duration)}</div>
+          <button class="track-delete-btn" title="Hapus lagu dari paket" aria-label="Delete track">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        `;
+
+        row.addEventListener('click', (e) => {
+          if (e.target.closest('.track-delete-btn')) return;
+          loadAndPlayTrack(item.originalIndex);
+        });
+
+        row.querySelector('.track-delete-btn').addEventListener('click', async (e) => {
+          e.stopPropagation();
+          await dbDeleteTrack(item.id);
+          await refreshPacksAndTracks();
+          showToast('Lagu dihapus dari paket');
+        });
+
+        listEl.appendChild(row);
+      });
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // =========================================================================
+    // 6. Event Listeners & Window Placement under Seelen Dynamic Island
+    // =========================================================================
+    document.getElementById('playPauseBtn').addEventListener('click', () => {
+      if (isPlaying) pauseAudio();
+      else playAudio();
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => playNext());
+    document.getElementById('prevBtn').addEventListener('click', () => playPrevious());
+
+    document.getElementById('shuffleBtn').addEventListener('click', (e) => {
+      isShuffle = !isShuffle;
+      e.currentTarget.classList.toggle('active', isShuffle);
+      showToast(isShuffle ? 'Mode Acak (Shuffle) Aktif' : 'Mode Acak Nonaktif');
+    });
+
+    document.getElementById('repeatBtn').addEventListener('click', (e) => {
+      if (repeatMode === 'all') {
+        repeatMode = 'one';
+        e.currentTarget.classList.add('active');
+        showToast('Ulangi 1 Lagu (Repeat One)');
+      } else if (repeatMode === 'one') {
+        repeatMode = 'off';
+        e.currentTarget.classList.remove('active');
+        showToast('Ulangi Nonaktif');
+      } else {
+        repeatMode = 'all';
+        e.currentTarget.classList.add('active');
+        showToast('Ulangi Semua Lagu di Paket (Repeat All)');
+      }
+    });
+
+    const seekSlider = document.getElementById('seekSlider');
+    seekSlider.addEventListener('input', () => {
+      seekSlider._dragging = true;
+      if (isFinite(audio.duration)) {
+        const previewTime = (seekSlider.value / 100) * audio.duration;
+        document.getElementById('currentTimeLabel').textContent = formatTime(previewTime);
+      }
+    });
+    seekSlider.addEventListener('change', () => {
+      seekSlider._dragging = false;
+      if (isFinite(audio.duration)) {
+        audio.currentTime = (seekSlider.value / 100) * audio.duration;
+      }
+    });
+
+    const volumeSlider = document.getElementById('volumeSlider');
+    volumeSlider.addEventListener('input', () => {
+      audio.volume = parseFloat(volumeSlider.value);
+      audio.muted = audio.volume === 0;
+    });
+
+    document.getElementById('muteBtn').addEventListener('click', () => {
+      audio.muted = !audio.muted;
+      showToast(audio.muted ? 'Audio Dibisukan (Muted)' : 'Audio Aktif');
+    });
+
+    document.getElementById('uploadFilesBtn').addEventListener('click', () => {
+      document.getElementById('mp3FileInput').click();
+    });
+
+    document.getElementById('uploadFolderBtn').addEventListener('click', () => {
+      document.getElementById('mp3FolderInput').click();
+    });
+
+    document.getElementById('mp3FileInput').addEventListener('change', (e) => {
+      if (e.target.files && e.target.files.length) {
+        handleUploadFiles(e.target.files);
+        e.target.value = '';
+      }
+    });
+
+    document.getElementById('mp3FolderInput').addEventListener('change', (e) => {
+      if (e.target.files && e.target.files.length) {
+        const firstPath = e.target.files[0].webkitRelativePath || '';
+        const folderName = firstPath.split('/')[0] || 'Paket Folder Baru';
+        handleUploadFiles(e.target.files, folderName);
+        e.target.value = '';
+      }
+    });
+
+    document.getElementById('searchInput').addEventListener('input', () => {
+      renderTrackList();
+    });
+
+    // New Pack Modal
+    const newPackModal = document.getElementById('newPackModal');
+    const newPackNameInput = document.getElementById('newPackNameInput');
+
+    document.getElementById('newPackBtn').addEventListener('click', () => {
+      newPackNameInput.value = '';
+      newPackModal.classList.add('open');
+      setTimeout(() => newPackNameInput.focus(), 50);
+    });
+
+    document.getElementById('cancelPackModalBtn').addEventListener('click', () => {
+      newPackModal.classList.remove('open');
+    });
+
+    document.getElementById('confirmPackModalBtn').addEventListener('click', async () => {
+      const name = newPackNameInput.value.trim();
+      if (!name) {
+        showToast('Masukkan nama paket musik');
+        return;
+      }
+      const newPack = {
+        id: 'pack-' + Date.now(),
+        name,
+        createdAt: Date.now()
+      };
+      await dbSavePack(newPack);
+      activePackId = newPack.id;
+      localStorage.setItem('aurora_active_pack_id', activePackId);
+      newPackModal.classList.remove('open');
+      await refreshPacksAndTracks();
+      showToast(`Paket "${name}" dibuat! Silakan upload file .MP3`);
+    });
+
+    newPackNameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') document.getElementById('confirmPackModalBtn').click();
+      if (e.key === 'Escape') newPackModal.classList.remove('open');
+    });
+
+    // Delete Pack
+    document.getElementById('deletePackBtn').addEventListener('click', async () => {
+      if (packs.length <= 1 && currentTracks.length === 0) {
+        showToast('Paket utama sudah kosong');
+        return;
+      }
+      const activePack = packs.find(p => p.id === activePackId);
+      await dbDeletePack(activePackId);
+      pauseAudio();
+      audio.src = '';
+      currentIndex = -1;
+      await refreshPacksAndTracks();
+      showToast(`Paket "${activePack ? activePack.name : ''}" dihapus`);
+    });
+
+    // Drag & Drop MP3 Files
+    const dropZone = document.getElementById('dropZone');
+    window.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = '#38bdf8';
+    });
+    window.addEventListener('dragleave', (e) => {
+      if (e.target === document.body || e.clientY <= 0) {
+        dropZone.style.borderColor = '';
+      }
+    });
+    window.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = '';
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
+        handleUploadFiles(e.dataTransfer.files);
+      }
+    });
+
+    // Spacebar Play/Pause shortcut
+    window.addEventListener('keydown', (e) => {
+      if (e.code === 'Space' && document.activeElement.tagName !== 'INPUT') {
+        e.preventDefault();
+        if (isPlaying) pauseAudio();
+        else playAudio();
+      }
+    });
+
+    // Position compact window neatly right below Seelen Dynamic Island
+    try {
+      const targetW = 460;
+      const targetH = 620;
+      window.resizeTo(targetW, targetH);
+      const x = Math.round((window.screen.availWidth - targetW) / 2);
+      const y = 46;
+      window.moveTo(x, y);
+    } catch (_) {}
+
+    // Initialize DB & Render
+    openDB().then(() => {
+      refreshPacksAndTracks();
+      drawVisualizer();
+    });
+  </script>
+</body>
+</html>
