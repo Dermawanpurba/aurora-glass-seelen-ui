@@ -129,15 +129,11 @@ body {
     overflow: visible !important;
   }
 
-  /* Sleek subtle vertical dividers between sections */
+  /* Clean dividerless Dynamic Island (No stray vertical lines) */
   .ft-bar-left::after,
   .ft-bar-center::after {
-    content: "" !important;
-    display: inline-block !important;
-    width: 1px !important;
-    height: 14px !important;
-    margin: 0 6px !important;
-    background: rgba(255, 255, 255, 0.16) !important;
+    display: none !important;
+    content: none !important;
   }
 }
 
