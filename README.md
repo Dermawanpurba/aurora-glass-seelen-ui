@@ -41,6 +41,10 @@ Aurora Glass 是一款非官方 Seelen UI 社群主題，讓 Dock、工具欄、
 
 The visual theme can be installed independently. Some application-launcher lifecycle and performance improvements shown in development builds belong to the Seelen UI application itself and are not included in this theme repository.
 
+## Optional native toolbar controls
+
+The [`extras/aurora-native-toolbar`](extras/aurora-native-toolbar) pack adds Seelen's calendar, network, volume, Quick Settings, notifications, and native Power Menu to the toolbar. Its installer preserves other items and backs up the saved toolbar layout before updating it. Restart Seelen UI after installation.
+
 ## Development installation
 
 With Seelen UI running, clone this repository and load the theme directly:

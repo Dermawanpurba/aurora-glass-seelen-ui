@@ -1,0 +1,162 @@
+id: '@seelen/tb-media-popup'
+metadata:
+  displayName:
+    af: Media-opspringer
+    am: የሚዲያ ብቅ-ባይ
+    ar: الوسائط المنبثقة
+    az: Media Popup
+    bg: Мултимедиен изскачащ прозорец
+    bn: মিডিয়া পপআপ
+    bs: Media Popup
+    ca: Popup de mitjans
+    cs: Vyskakovací okno médií
+    cy: Naid Cyfryngau
+    da: Medie popup
+    de: Medien-Popup
+    el: Αναδυόμενο παράθυρο πολυμέσων
+    en: Media Popup
+    es: Ventana emergente multimedia
+    et: Meedia hüpikaken
+    eu: Media Popup
+    fa: بازشو رسانه
+    fi: Median ponnahdusikkuna
+    fr: Pop-up multimédia
+    gu: મીડિયા પોપઅપ
+    he: פופאפ מדיה
+    hi: मीडिया पॉपअप
+    hr: Medijski skočni prozor
+    hu: Média előugró ablak
+    hy: Մեդիա թռուցիկ
+    id: Munculan Media
+    is: Fjölmiðlasprettigluggi
+    it: Popup multimediale
+    ja: メディアポップアップ
+    ka: მედია ამომხტარი
+    km: ប្រព័ន្ធផ្សព្វផ្សាយលេចឡើង
+    ko: 미디어 팝업
+    ku: Media Popup
+    lb: Media Popup
+    lo: ສື່ປັອບອັບ
+    lt: Iššokantis medijos langas
+    lv: Multivides uznirstošais logs
+    mk: Медиумски скокачки прозорец
+    mn: Хэвлэл мэдээллийн цонх
+    ms: Pop Timbul Media
+    mt: Popup tal-Midja
+    ne: मिडिया पपअप
+    nl: Mediapop-up
+    'no': Media Popup
+    pa: ਮੀਡੀਆ ਪੌਪਅੱਪ
+    pl: Wyskakujące okienko multimediów
+    ps: د رسنیو پاپ اپ
+    pt-BR: Media Popup
+    pt-PT: Pop-up de mídia
+    ro: Popup media
+    ru: Медиа-всплывающее окно
+    si: මාධ්‍ය උත්පතනය
+    sk: Vyskakovacie okno médií
+    so: Baahinta Warbaahinta
+    sr: Медијски искачући прозор
+    sv: Media popup
+    sw: Ibukizi ya Media
+    ta: மீடியா பாப்அப்
+    te: మీడియా పాప్అప్
+    tg: Поп-апаи медиа
+    th: สื่อป๊อปอัป
+    tl: Media Popup
+    tr: Medya Açılır Penceresi
+    uk: Медіа спливаюче вікно
+    ur: میڈیا پاپ اپ
+    uz: Media qalqib chiquvchi oyna
+    vi: Cửa sổ bật lên phương tiện
+    yo: Agbejade Media
+    zh-CN: 媒体弹窗
+    zh-TW: 媒體彈出視窗
+    zu: I-Popup yemidiya
+  description:
+    af: Mediakontroles en volumemenger-opspringer
+    am: የሚዲያ መቆጣጠሪያዎች እና የድምጽ ማደባለቅ ብቅ ባይ
+    ar: عناصر التحكم في الوسائط والنوافذ المنبثقة لخلاط الصوت
+    az: Media nəzarətləri və səs mikseri popup
+    bg: Медийни контроли и изскачащ прозорец на миксера за сила на звука
+    bn: মিডিয়া কন্ট্রোল এবং ভলিউম মিক্সার পপআপ
+    bs: Kontrole medija i iskačući prozor za mikser zvuka
+    ca: Controls multimèdia i menú emergent del mesclador de volum
+    cs: Ovládací prvky médií a vyskakovací okno směšovače hlasitosti
+    cy: Rheolaethau cyfryngau a naid cymysgydd cyfaint
+    da: Mediekontroller og volumemixer popup
+    de: Popup-Fenster für Mediensteuerung und Lautstärkemixer
+    el: Αναδυόμενα στοιχεία ελέγχου πολυμέσων και μίκτη έντασης ήχου
+    en: Media controls and volume mixer popup
+    es: Controles multimedia y ventana emergente del mezclador de volumen
+    et: Meediumi juhtnupud ja helitugevuse mikseri hüpikaken
+    eu: Multimedia kontrolak eta bolumen-nahastagailuaren leihoa
+    fa: بازشو کنترل رسانه و میکسر صدا
+    fi: Mediaohjaimet ja äänenvoimakkuuden mikserin ponnahdusikkuna
+    fr: Commandes multimédia et fenêtre contextuelle du mixeur de volume
+    gu: મીડિયા નિયંત્રણો અને વોલ્યુમ મિક્સર પોપઅપ
+    he: בקרות מדיה וחלון קופץ של מערבל עוצמת הקול
+    hi: मीडिया नियंत्रण और वॉल्यूम मिक्सर पॉपअप
+    hr: Kontrole medija i skočni prozor miksera glasnoće
+    hu: Médiavezérlők és hangerőkeverő előugró ablak
+    hy: Մեդիա հսկիչներ և ձայնի խառնիչի ելնող պատուհան
+    id: Kontrol media dan popup pengaduk volume
+    is: Miðlunarstýringar og sprettigluggi fyrir hljóðstyrksblöndunartæki
+    it: Controlli multimediali e popup del mixer del volume
+    ja: メディア コントロールとボリューム ミキサー ポップアップ
+    ka: მედია კონტროლი და ხმის მიქსერის ამომხტარი ფანჯარა
+    km: ការគ្រប់គ្រងមេឌៀ និងឧបករណ៍លាយកម្រិតសំឡេងលេចឡើង
+    ko: 미디어 컨트롤 및 볼륨 믹서 팝업
+    ku: Kontrolên medyayê û pêlava mîkserê dengdanê
+    lb: Media Kontrollen a Volumenmixer Popup
+    lo: ການຄວບຄຸມສື່ ແລະປັອບອັບເຄື່ອງປະສົມລະດັບສຽງ
+    lt: Medijos valdikliai ir garsumo maišytuvo iššokantis langas
+    lv: Multivides vadīklas un skaļuma miksera uznirstošais logs
+    mk: Медиумски контроли и скокачки прозорец на миксер за јачина на звук
+    mn: Медиа удирдлага болон дууны хэмжээг холигч цонх
+    ms: Kawalan media dan pop timbul pengadun volum
+    mt: Kontrolli tal-midja u popup tal-mixer tal-volum
+    ne: मिडिया नियन्त्रण र भोल्युम मिक्सर पपअप
+    nl: Mediabediening en volumemixer-pop-up
+    'no': Mediekontroller og popup for volummikser
+    pa: ਮੀਡੀਆ ਨਿਯੰਤਰਣ ਅਤੇ ਵਾਲੀਅਮ ਮਿਕਸਰ ਪੌਪਅੱਪ
+    pl: Wyskakujące okno sterowania multimediami i miksera głośności
+    ps: د میډیا کنټرول او حجم مکسر پاپ اپ
+    pt-BR: Media controls and volume mixer popup
+    pt-PT: Controles de mídia e pop-up do mixer de volume
+    ro: Comenzi media și pop-up pentru mixer de volum
+    ru: Элементы управления мультимедиа и всплывающее окно микшера громкости
+    si: මාධ්‍ය පාලන සහ වෙළුම් මිශ්‍ර උත්පතනය
+    sk: Ovládacie prvky médií a kontextové okno mixéra hlasitosti
+    so: Xakamaynta warbaahinta iyo soo kicinta mugga
+    sr: Контроле медија и искачући прозор миксера за јачину звука
+    sv: Mediakontroller och popup för volymmixer
+    sw: Vidhibiti vya midia na kiibukizi cha kichanganya sauti
+    ta: மீடியா கட்டுப்பாடுகள் மற்றும் வால்யூம் மிக்சர் பாப்அப்
+    te: మీడియా నియంత్రణలు మరియు వాల్యూమ్ మిక్సర్ పాప్అప్
+    tg: Назорати медиа ва поп-папкаи миксер овоз
+    th: ส่วนควบคุมสื่อและป๊อปอัปตัวปรับแต่งระดับเสียง
+    tl: Mga kontrol ng media at popup ng volume mixer
+    tr: Medya kontrolleri ve ses karıştırıcı açılır penceresi
+    uk: Елементи керування мультимедіа та спливаюче вікно мікшера гучності
+    ur: میڈیا کنٹرولز اور حجم مکسر پاپ اپ
+    uz: Media boshqaruvlari va ovoz balandligi mikserining qalqib chiquvchi oynasi
+    vi: Điều khiển phương tiện và cửa sổ bật lên bộ trộn âm lượng
+    yo: Awọn iṣakoso media ati agbejade aladapo iwọn didun
+    zh-CN: 媒体控件和音量合成器弹窗
+    zh-TW: 媒體元件和音量混合器彈出視窗
+    zu: Izilawuli zemidiya kanye ne-popup ye-volume mixer
+icon: IoVolumeHighOutline
+target: '@seelen/fancy-toolbar'
+plugin:
+  scopes:
+  - Media
+  template: "return isMuted\n  ? icon(\"IoVolumeMuteOutline\")\n  : volume >= 0.66\n    ? icon(\"IoVolumeHighOutline\")\n\
+    \    : volume >= 0.33\n      ? icon(\"IoVolumeMediumOutline\")\n      : volume != 0\n        ? icon(\"IoVolumeLowOutline\"\
+    )\n        : icon(\"IoVolumeOffOutline\")"
+  tooltip: 'return [t("placeholder.volume"), ": ", (volume * 100).toFixed(0), "%"]'
+  onClick: trigger("@seelen/media-popup");
+  onWheelUp: "if (defaultOutputDevice) {\n  invoke(SeelenCommand.SetVolumeLevel, { deviceId: defaultOutputDevice.id, level:\
+    \ Math.min(1, volume + 0.02), sessionId: null });\n}"
+  onWheelDown: "if (defaultOutputDevice) {\n  invoke(SeelenCommand.SetVolumeLevel, { deviceId: defaultOutputDevice.id, level:\
+    \ Math.max(0, volume - 0.02), sessionId: null });\n}"
